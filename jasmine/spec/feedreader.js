@@ -27,21 +27,21 @@ $(function () {
         });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* Done: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
 
         it('Check if the URLS is defined ', () => {
 
-            allFeeds.forEach((allFeeds) => {
-                expect(allFeeds.url).toBeDefined();
-                expect(allFeeds.url.length).not.toBe(0);
-                expect(allFeeds.url).not.toBeNull();
+            allFeeds.forEach((feed) => {
+                expect(feed.url).toBeDefined();
+                expect(feed.url.length).not.toBe(0);
+                expect(feed.url).not.toBeNull();
             });
 
         });
-        /* TODO: Write a test that loops through each feed
+        /* Done: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
@@ -57,11 +57,11 @@ $(function () {
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* Done: Write a new test suite named "The menu" */
     describe('The menu', () => {
 
 
-        /* TODO: Write a test that ensures the menu element is
+        /* Done: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
@@ -72,7 +72,7 @@ $(function () {
             expect(body.classList.contains('menu-hidden')).toBeTruthy();
         });
 
-        /* TODO: Write a test that ensures the menu changes
+        /* Done: Write a test that ensures the menu changes
          * visibility when the menu icon is clicked. This test
          * should have two expectations: does the menu display when
          * clicked and does it hide when clicked again.
@@ -81,28 +81,26 @@ $(function () {
         it('Check menu toggles ', () => {
 
             const body = $('body'); 
-            // const body = document.querySelector('body'); // I don't know why it's faild when i use query Selector i hope if you give me en explanation for that 
             const menu = $('.menu-icon-link');
-            // const menu = document.querySelector('.menu-icon-link');
 
-            // menu.trigger('click');
-            menu.click();
+            menu.trigger('click');
             expect(body.hasClass('menu-hidden')).toBe(false);
 
-            // menu.trigger('click');
-            menu.click();
+
+            menu.trigger('click');
             expect(body.hasClass('menu-hidden')).toBe(true);
+
 
         });
 
     });
 
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Done: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', () => {
 
 
-        /* TODO: Write a test that ensures when the loadFeed
+        /* Done: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
@@ -112,9 +110,7 @@ $(function () {
             loadFeed(0, done);
         });
         it('completes work', (done) => {
-            // const feed = document.querySelector('.feed');
-            const feed = $('.feed');
-            // expect(feed.children.length > 0 ).toBeTruthy();
+            const feed = $('.feed .entry');
             expect(feed.children.length).toBeGreaterThan(0);
             done();
         });
@@ -122,22 +118,26 @@ $(function () {
     });
 
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+    /* Done: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', () => {
         const feed = document.querySelector('.feed');
         const fristFeed = [];
-        /* TODO: Write a test that ensures when a new feed is loaded
+        /* Done: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
         beforeEach((done) => {
 
-            loadFeed(0);
-            Array.from(feed.children).forEach((entry) => {
-                fristFeed.push(entry.innerText);
+            loadFeed(0, () =>{
+                Array.from(feed.children).forEach((entry) => {
+                    fristFeed.push(entry.innerText);
+                });
+
+                loadFeed(1, done);
+
             });
 
-            loadFeed(1, done);
+
         });
 
         it('Content changes', () => {
