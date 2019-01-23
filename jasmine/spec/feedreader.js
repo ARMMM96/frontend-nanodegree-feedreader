@@ -46,10 +46,10 @@ $(function () {
          * and that the name is not empty.
          */
         it('cheak name', () => {
-            allFeeds.forEach((allFeeds) => {
-                expect(allFeeds.name).toBeDefined();
-                expect(allFeeds.name).not.toBeNull();
-                expect(allFeeds.name.length).not.toBe(0);
+            allFeeds.forEach((feed) => {
+                expect(feed.name).toBeDefined();
+                expect(feed.name).not.toBeNull();
+                expect(feed.name.length).not.toBe(0);
 
             });
         });
@@ -111,7 +111,7 @@ $(function () {
         });
         it('completes work', (done) => {
             const feed = $('.feed .entry');
-            expect(feed.children.length).toBeGreaterThan(0);
+            expect(feed.length).toBeGreaterThan(0);
             done();
         });
 
@@ -129,7 +129,7 @@ $(function () {
         beforeEach((done) => {
 
             loadFeed(0, () =>{
-                Array.from(feed.children).forEach((entry) => {
+                Array.from(feed).forEach((entry) => {
                     fristFeed.push(entry.innerText);
                 });
 
@@ -143,7 +143,7 @@ $(function () {
         it('Content changes', () => {
 
             // console.log(feed.children[0].innerText);
-            Array.from(feed.children).forEach((entry, index) => {
+            Array.from(feed).forEach((entry, index) => {
                 expect(entry.innerText === fristFeed[index]).toBeFalsy();
             });
 
