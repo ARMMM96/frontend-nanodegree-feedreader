@@ -2,7 +2,13 @@
 This project is a web-based application that reads RSS feeds. It uses [Jasmine](http://jasmine.github.io/) for testing.
 
 #
+##  Testing  scenario
+Inside the jasmine  ```feedreader.js```  i have written script that tested the app functionality and ensure that everything working well without bugs or errors.
+
+#
 ## Run.
+First you need to clone the app in to your local machine.
+
 Open ```index.html``` in your browser.
 
 # About Testing script.
